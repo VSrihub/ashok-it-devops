@@ -1,0 +1,40 @@
+spring:
+  application:
+    name: medilab-department-service
+  profiles:
+    active: dev
+server:
+  port: 9098
+  tomcat:
+    connection-timeout: 180000
+      
+springdoc:
+  swagger-ui:
+    enabled: true
+    path: /department-doc.html
+  api-docs:
+    enabled: true
+    path: /department-api
+user: 
+ data:
+  duplicate: 
+    message: The Data submitted may have already existed. Please check the data and submit once again
+---
+spring:
+  profiles: dev
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    #url: jdbc:mysql://localhost:30306/medilab-department-service
+    url: jdbc:mysql://department-service-database:3306/medilab-department-service
+    username: root
+    password: root
+  jpa:
+    generate-ddl: true
+    show-sql: true
+---
+spring:
+  profiles: stage
+  h2:
+    console:
+      enabled: true
+      path: /h2Console

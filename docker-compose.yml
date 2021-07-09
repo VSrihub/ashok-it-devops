@@ -1,0 +1,20 @@
+version: "3.8"
+services:
+  medilab-department-service:
+    container_name: medilab-department-service-container
+    image: medilab-department-image
+    restart: on-failure
+    ports:
+      - 5003:9098
+    depends_on:
+      - medilab-department-service-mysql
+  medilab-department-service-mysql:
+    container_name: department-service-mysql
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_DATABASE: medilab-department-service
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_HOST: "%"
+    ports:
+      - 3306:3306

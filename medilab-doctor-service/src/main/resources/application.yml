@@ -1,0 +1,36 @@
+spring:
+  application:
+    name: medilab-doctor-service
+  profiles:
+    active: dev
+server:
+  port: 9099
+springdoc:
+  swagger-ui:
+    enabled: true
+    path: /doctor-service-doc.html
+  api-docs:
+    enabled: true
+    path: /doctor-service-api
+user: 
+ data:
+  duplicate: 
+    message: The Data submitted may have already existed. Please check the data and submit once again
+---
+spring:
+  profiles: dev
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/medilab-doctor-service
+    username: root
+    password: root
+  jpa:
+    generate-ddl: true
+    show-sql: true
+---
+spring:
+  profiles: stage
+  h2:
+    console:
+      enabled: true
+      path: /h2Console
